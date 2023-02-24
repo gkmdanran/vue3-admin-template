@@ -49,9 +49,11 @@ const withSidebar = computed(() => route.meta.withSidebar === false ? false : tr
     .header_right {
       display: flex;
       align-items: center;
+      height: 100%;
 
       img {
         width: 180px;
+        height: 100%;
       }
 
       .title {
@@ -81,4 +83,5 @@ const withSidebar = computed(() => route.meta.withSidebar === false ? false : tr
   }
 }
 </style>
+
 
