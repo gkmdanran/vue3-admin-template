@@ -1,30 +1,84 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <el-container class="outside">
+    <el-header v-if="withHeader">
+      <div class="header_right">
+        <img src="@/assets/logo.png" />
+        <div class="title">xxxx</div>
+      </div>
+      <div>admin</div>
+    </el-header>
+    <el-container :style="{ height: withHeader ? 'calc(100% - 40px)' : '100%' }">
+      <el-aside v-if="withSidebar">
+        <Sidebar style="height: 100%;" />
+      </el-aside>
+      <el-main style="padding:0" v-if="route.meta.paddingPanel === false">
+        <div class="pannel">
+          <router-view></router-view>
+        </div>
+      </el-main>
+
+      <el-main v-else>
+        <div class="pannel padding-panel">
+          <router-view></router-view>
+        </div>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import Sidebar from '@/components/Sidebar/index.vue'
 
-#nav {
-  padding: 30px;
+const route = useRoute()
+const withHeader = computed(() => route.meta.withHeader === false ? false : true)
+const withSidebar = computed(() => route.meta.withSidebar === false ? false : true)
+</script>
+<style scoped lang="less">
+.outside {
+  height: 100%;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  .el-header {
+    height: 40px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    &.router-link-exact-active {
-      color: #42b983;
+    .header_right {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 180px;
+      }
+
+      .title {
+        margin-left: 10px;
+        font-weight: 700;
+        font-size: 18px;
+      }
     }
+  }
+
+  .el-main {
+    background-color: #f7fafc;
+  }
+
+  .el-aside {
+    height: 100%;
+    width: 200px;
+  }
+
+  .pannel {
+    height: 100%;
+  }
+
+  .padding-panel {
+    padding: 15px;
+    background-color: #fff;
   }
 }
 </style>
+
