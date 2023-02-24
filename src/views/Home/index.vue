@@ -5,7 +5,7 @@
                 <img src="@/assets/logo.png" />
                 <div class="title">管理后台</div>
             </div>
-            <div>admin</div>
+            <UserProfile></UserProfile>
         </el-header>
         <el-container :style="{ height: withHeader ? 'calc(100% - 40px)' : '100%' }">
             <el-aside v-if="withSidebar">
@@ -30,6 +30,7 @@
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Sidebar from '@/components/Sidebar/index.vue'
+import UserProfile from '@/components/UserProfile/index.vue'
 const router = useRouter()
 const route = useRoute()
 const withHeader = computed(() => route.meta.withHeader === false ? false : true)
