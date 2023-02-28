@@ -66,5 +66,7 @@ function expandClick(type: boolean) {
 
 .btns {
     margin-left: 5px;
+    display: flex;
+    align-items: center;
 }
 </style>
