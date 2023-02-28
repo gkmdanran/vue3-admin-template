@@ -1,5 +1,5 @@
 <template>
-    <el-form class="ez-search">
+    <el-form class="ez-search" :labelWidth="labelWidth">
         <el-row>
             <el-col :style="getStyle(item)" v-for="(item, key) in searchJson.searchItems || {}"
                 :xl="(item.layout && item.layout.xl) || (searchJson.layout && searchJson.layout.xl) || 4"
@@ -86,7 +86,11 @@ const props = defineProps({
     debounce: {
         type: Number,
         default: 300
-    }
+    },
+    labelWidth: {
+        type: String,
+        default: "80px",
+    },
 })
 const emits = defineEmits(["change", "update:modelValue"])
 let timeout: number = -1
